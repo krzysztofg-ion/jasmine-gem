@@ -23,7 +23,12 @@ module Jasmine
           raise 'Add "chrome_remote" you your Gemfile. To use chromeheadless we require this gem.'
         end
 
-        chrome = wait_for { ChromeRemote.client }
+        begin
+          chrome = wait_for { Chrome.client }
+        rescue LoadError => e
+          raise e.message
+        end
+
         chrome.send_cmd "Runtime.enable"
         chrome.send_cmd "Page.navigate", url: jasmine_server_url
         result_recived = false
@@ -81,7 +86,7 @@ module Jasmine
       def wait_for
 
 
-        puts "new logic"
+        puts "new logic 2"
 
 
         time = Time.now.to_i
