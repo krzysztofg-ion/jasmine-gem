@@ -14,8 +14,11 @@ module Jasmine
       end
 
       def run
+        puts "\"#{chrome_binary}\" #{cli_options_string}"
         chrome_server = IO.popen("\"#{chrome_binary}\" #{cli_options_string}")
+        puts "before wait_for_chrome_to_start_debug_socket"
         wait_for_chrome_to_start_debug_socket
+        puts "after wait_for_chrome_to_start_debug_socket"
 
         begin
           require "chrome_remote"
@@ -108,8 +111,10 @@ module Jasmine
       def wait_for_chrome_to_start_debug_socket
         open_socket = -> do
           begin
+            puts "before tcpsocket open"
             conn = TCPSocket.new('localhost', 9222)
             conn.close
+            puts "after tcpsocket open"
             true
           rescue
             nil
