@@ -96,7 +96,8 @@ module Jasmine
         result = try_to { yield }
 
         while !result && Time.now.to_i - time < config.chrome_startup_timeout
-          sleep(0.1)
+          puts "1. #{config.chrome_startup_timeout}  #{Time.now.to_i - time}"
+          sleep(20)
           result = try_to { yield }
         end
         result
