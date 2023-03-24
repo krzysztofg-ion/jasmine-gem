@@ -27,7 +27,7 @@ module Jasmine
         end
 
         begin
-          chrome = wait_for { Chrome.client }
+          chrome = wait_for { ChromeRemote.client }
         rescue LoadError => e
           raise e.message
         end
