@@ -15,7 +15,7 @@ module Jasmine
 
       def run
         puts "\"#{chrome_binary}\" #{cli_options_string}"
-        chrome_server = IO.popen("\"#{chrome_binary}\" #{cli_options_string}")
+        chrome_server = IO.popen("\"#{chrome_binary}\" #{cli_options_string} about:blank")
         puts "before wait_for_chrome_to_start_debug_socket"
         wait_for_chrome_to_start_debug_socket
         puts "after wait_for_chrome_to_start_debug_socket"
